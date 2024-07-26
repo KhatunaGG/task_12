@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5vh 0 5vh 0;
+            gap: 10px;
+        }
+
+        .expense {
+            border: 1px solid black;
+            padding: 10px;
+            margin-bottom: 10px;
+            display: none;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .btn-div {
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+            justify-content: space-around;
+            margin-bottom: 10px;
+        }
+
+        .info {
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="info">
+            <div>
+                <label for="category">Category:
+                    <input type="text" id="category">
+                </label>
+                <label for="price">Price:
+                    <input type="text" id="price">
+                </label>
+                <button class="update-expense" data-id="<%= expenseForUpdate.id %>">update</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const categoryInput = document.getElementById('category');
+        const priceInput = document.getElementById('price');
+        const updateButton = document.querySelector('.update-expense')
+
+        updateButton.addEventListener('click', async () => {
+            const infoForUpdate = {
+                price: Number(priceInput.value),
+                category: categoryInput.value
+            }
+
+            try {
+                const id = updateButton.getAttribute('data-id');
+                const res = await axios.put(`http://localhost:3003/expenses/update/${id}`, { infoForUpdate });
+            } catch (error) {
+                console.error(error);
+            }
+        })
+    </script>
+</body>
+
+</html>

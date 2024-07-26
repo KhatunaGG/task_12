@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Expense</title>
+</head>
+<style>
+        .consainer {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div class="info">
+            <div class="btn-div">
+                <label for="name">Name:
+                    <input type="text" id="name">
+                </label>
+                <label for="price">Price:
+                    <input type="text" id="price">
+                </label>
+                <label for="category">Category:
+                    <input type="text" id="category">
+                </label>
+                <label for="initBalance">InitBalance:
+                    <input type="text" id="initBalance">
+                </label>
+                <button id="createBtn">Create</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        const nameInput = document.getElementById('name');
+        const priceInput = document.getElementById('price');
+        const categoryInput = document.getElementById('category');
+        const initBalanceInput = document.getElementById('initBalance');
+        const createBtn = document.getElementById('createBtn');
+
+        createBtn.addEventListener('click', async () => {
+            const newExpense = {
+                name: nameInput.value,
+                price: priceInput.value,
+                category: categoryInput.value,
+                initBalance: initBalanceInput.value
+            };
+
+            try {
+                const res = await axios.post('http://localhost:3003/expenses/create', newExpense);
+            } catch (error) {
+                console.error(error);
+            }
+        });
+    </script>
+</body>
+
+</html>
+
+

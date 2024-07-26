@@ -1,0 +1,102 @@
+[
+    {
+        "id": 3,
+        "name": "b",
+        "initBalance": 200,
+        "expense": [
+            {
+                "price": 100,
+                "category": "ddd",
+                "date": "2024-07-24T15:37:30.339Z",
+                "id": 1
+            },
+            {
+                "price": 50,
+                "category": "kkk",
+                "date": "2024-07-26T12:27:57.448Z",
+                "id": 2
+            }
+        ],
+        "currentBalance": 50
+    },
+    {
+        "id": 4,
+        "name": "c",
+        "initBalance": 200,
+        "expense": [
+            {
+                "price": 100,
+                "category": "ddd",
+                "date": "2024-07-24T15:37:34.685Z",
+                "id": 1
+            },
+            {
+                "price": 45,
+                "category": "sss",
+                "date": "2024-07-24T16:22:16.776Z",
+                "id": 2
+            },
+            {
+                "price": 5,
+                "category": "vvv",
+                "date": "2024-07-24T16:22:50.501Z",
+                "id": 3
+            }
+        ],
+        "currentBalance": 50
+    },
+    {
+        "id": 6,
+        "name": "c",
+        "initBalance": 200,
+        "expense": [
+            {
+                "price": 100,
+                "category": "ccc",
+                "date": "2024-07-24T16:23:52.944Z",
+                "id": 1
+            },
+            {
+                "price": 50,
+                "category": "mmm",
+                "date": "2024-07-24T16:24:30.455Z",
+                "id": 2
+            }
+        ],
+        "currentBalance": 50
+    },
+    {
+        "id": 7,
+        "name": "n",
+        "initBalance": 200,
+        "expense": [
+            {
+                "price": 100,
+                "category": "nnn",
+                "date": "2024-07-24T17:03:34.456Z",
+                "id": 1
+            }
+        ],
+        "currentBalance": 100
+    },
+    {
+        "id": 10,
+        "name": "adam",
+        "initBalance": "1000",
+        "expense": [
+            {
+                "price": 555,
+                "category": "www",
+                "date": "2024-07-26T12:46:24.347Z",
+                "id": 1
+            },
+            {
+                "price": 45,
+                "category": "eee",
+                "date": "2024-07-26T12:47:12.751Z",
+                "id": 2
+            }
+        ],
+        "currentBalance": 400
+    }
+]

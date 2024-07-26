@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deleted Expense</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5vh 0 5vh 0;
+            gap: 10px;
+        }
+
+        .expense {
+            border: 1px solid black;
+            padding: 10px;
+            margin-bottom: 10px;
+            display: none;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .btn-div {
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+            justify-content: space-around;
+            margin-bottom: 10px;
+        }
+
+        .info {
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="info">
+            <div>
+                <%= deletedExpense.name %>
+                <span class="spanId">ID: <%= deletedExpense.id %></span>
+                <span>InitBalance: <%= deletedExpense.initBalance %></span>
+                <span>Current Balance: <%= deletedExpense.currentBalance %></span>
+                <ul>
+                    <% deletedExpense.expense.forEach(item => { %>
+                        <li>Price: <%= item.price %></li>
+                        <li>Category: <%= item.category %></li>
+                        <li>Expense Date: <%= item.date %></li>
+                        <li>Expense ID: <%= item.id %></li>
+                    <% }); %>
+                </ul>
+                <button class="delete-expense" data-id="<%= deletedExpense.id %>">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const deleteButton = document.querySelector('.delete-expense');
+        deleteButton.addEventListener('click', async () => {
+            const id = deleteButton.getAttribute('data-id');
+            try {
+                const res = await axios.delete(`http://localhost:3003/expenses/delete/${id}`);
+            } catch (error) {
+                console.error(error);
+            }
+        });
+    </script>
+</body>
+
+</html>

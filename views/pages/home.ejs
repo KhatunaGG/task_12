@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5vh 0 5vh 0;
+            gap: 10px;
+        }
+
+        .expense {
+            border: 1px solid black;
+            padding: 10px;
+            margin-bottom: 10px;
+            display: none;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .btn-div {
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+            justify-content: space-around;
+            margin-bottom: 10px;
+        }
+
+        .info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .btn-div {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+            margin-top: 20px;
+
+        }
+
+        span {
+            font-weight: bold;
+        }
+
+        .ul-block {
+            margin-bottom: 10px;
+        }
+
+        .main-div {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="btn-div">
+            <button class="create">
+                <a href="http://localhost:3003/expenses/create" target="_blank">create</a>
+            </button>
+            <button class="show">show more...</button>
+        </div>
+
+        <div class="info">
+            <% data.forEach(el=> { %>
+                <div class="expense">
+                    <div class="main-div">
+                        <span>Name: <%= el.name %></span>
+                        <span class="spanId">id: <%= el.id %></span>
+                        <span> InitBalance: <%= el.initBalance %></span>
+                        <span>Current Balance: <%= el.currentBalance %></span>
+                    </div>
+
+                    <% el.expense.forEach(item=> { %>
+                        <ul class="ul-block">
+                            <li>
+                                price: <%= item.price %>
+                            </li>
+                            <li>
+                                category: <%= item.category %>
+                            </li>
+                            <li>
+                                expense date: <%= item.date %>
+                            </li>
+                            <li>
+                                expense id: <%= item.id %>
+                            </li>
+                        </ul>
+                        <% }); %>
+                            <div class="btn-div">
+                                <button class="delete-expense" data-id="<%= el.id %>">Delete</button>
+                                <button class="update-expense" data-id="<%= el.id %>">Update</button>
+                            </div>
+                </div>
+                <% }) %>
+        </div>
+    </div>
+
+    <script>
+        const showButton = document.querySelector('.show');
+        const expenseDivs = document.querySelectorAll('.expense');
+        const deleteButtons = document.querySelectorAll('.delete-expense');
+        const updateButtons = document.querySelectorAll('.update-expense');
+
+        showButton.addEventListener('click', () => {
+            expenseDivs.forEach(el => {
+                if (el.style.display === "none" || el.style.display === "") {
+                    el.style.display = "inline-block";
+                } else {
+                    el.style.display = "none";
+                }
+            });
+        });
+
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', async () => {
+                const id = button.getAttribute('data-id');
+                window.open(`http://localhost:3003/expenses/delete/${id}`, '_blank');
+                const res = await axios.post(`http://localhost:3003/expenses/delete/${id}`, id);
+            });
+        });
+
+        updateButtons.forEach(button => {
+            button.addEventListener('click', async () => {
+                const id = button.getAttribute('data-id');
+                window.open(`http://localhost:3003/expenses/update/${id}`, '_blank');
+                const res = await axios.put(`http://localhost:3003/expenses/update/${id}`, id);
+                console.log(id)
+            })
+        })
+
+
+
+
+
+    </script>
+</body>
+
+</html>
